@@ -32,6 +32,28 @@ export class Family {
   }
 }
 
+//////////////////
 
+export interface IPersonItem {
+  _id?: number;
+  name: string;
+  lastName: string;
+  fullName: string;
+}
 
+export class PersonItem implements IPersonItem {
+  constructor(
+    public name: string,
+    public lastName: string,
+    public _id?: number
+  ) {
+  }
 
+  get fullName() { return `${this.name} ${this.lastName}`; }
+}
+
+export class MyService {
+  getPersonItem(): IPersonItem {
+    return new PersonItem('first', 'last', 123);
+  }
+}

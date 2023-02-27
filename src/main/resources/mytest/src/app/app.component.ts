@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Family, Person} from "./models/custom.model";
+import {Family, IPersonItem, MyService, Person} from "./models/custom.model";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,20 @@ import {Family, Person} from "./models/custom.model";
 export class AppComponent {
   title = 'mytest';
 
-  defaultValuePrepareFunction () {
+  constructor(private myService: MyService) {}
+
+  ngOnInit() {
+
+    this.testDefaultValuePrepareFunction1 ();
+
+    this.testDefaultValuePrepareFunction2 ();
+
+    this.testAssignAValToInterface();
+
+  }
+
+
+  testDefaultValuePrepareFunction1 () {
 
     /*
     * TYPESCRIPT -- interface with default value
@@ -35,6 +48,11 @@ export class AppComponent {
     console.log(person);
     console.log(person2);
 
+
+  }
+
+  testDefaultValuePrepareFunction2 () {
+
     // interface, how to define default value
     const name =  "suil";
     const family = new Family("Street# 1");
@@ -43,5 +61,9 @@ export class AppComponent {
 
   }
 
-
+  testAssignAValToInterface(){
+    // Assign a value to an interface property using a function on another in angular / typescript?
+    const person: IPersonItem = this.myService.getPersonItem();
+    console.log(person.fullName); // "first last"
+  }
 }
